@@ -39,5 +39,5 @@ set ttsummoners1=5
 
 set cass=Cassiopeia
 
-set vcheckurl="https://github.com/TheTrain2000/UltimateBraveryBatch/archive/versioncheck.zip"
-set ubmainurl="https://github.com/TheTrain2000/UltimateBraveryBatch/archive/master.zip"
+set vcheckurl="https://raw.githubusercontent.com/TheTrain2000/UltimateBraveryBatch/versioncheck/curver.bat"
+set ubmainurl="https://raw.githubusercontent.com/TheTrain2000/UltimateBraveryBatch/master/UltimateBravery.zip"

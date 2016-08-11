@@ -1371,8 +1371,7 @@ goto :tttopcustom
 :update
 cls
 if %forceupdate%==1 goto :forceupdate
-Resources\Libraries\wget -O Resources\_curver.zip "%vcheckurl%"
-Resources\Libraries\7za x "%cd%\Resources\_curver.zip" -y -o"%cd%\Resources"
+Resources\Libraries\wget -O Resources\_curver.bat "%vcheckurl%"
 for %%a in (Resources\_curver.bat) do (
 set curverlength=%%~za
 )
