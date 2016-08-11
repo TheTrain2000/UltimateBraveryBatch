@@ -12,30 +12,32 @@
 set bgcolor=0
 set fgcolor=F
 
+set lang=EN_US
+set patch=6.15
+set pversion=1.4.6
+set forceupdate=0
+set offlinemode=0
 
-
-set patch= 6.6
-set pversion=1.3.2
-
-set adjectives=33
-set champs=130
+set adjectives=41
+set champs=131
 set max=3
-set boots=28
+set boots=7
 set masteries=22
 set trinket=3
 
 set summoners2=4
 set summoners1=5
-set items=59
+set items=60
 
-set aramitems=62
+set aramitems=63
 set aramsummoners2=4
 set aramsummoners1=3
 
-set ttitems=51
+set ttitems=53
 set ttsummoners2=5
 set ttsummoners1=5
 
+set cass=Cassiopeia
 
-
-set downloadurl=https://dl.dropboxusercontent.com/u/29546617/UltimateBravery/UltimateBravery.zip
+set vcheckurl="https://www.dropbox.com/s/qnyisgur7wvaqcl/curver.bat?dl=1"
+set ubmainurl="https://www.dropbox.com/s/qp2on2pq8yeknvs/UltimateBravery.zip?dl=1"

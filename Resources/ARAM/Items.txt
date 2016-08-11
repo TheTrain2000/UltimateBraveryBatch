@@ -6,7 +6,6 @@ Talisman of Ascension
 Frost Queen's Claim
 Face of the Mountain
 Ardent Censer
-Will of the Ancients
 Mikael's Crucible
 Abyssal Scepter
 Zeke's Harbinger
@@ -17,7 +16,7 @@ Locket of the Iron Solari
 Runaan's Hurricane
 Statikk Shiv
 Rapid Firecannon
-Entropy
+Guardian's Hammer
 Righteous Glory
 Void Staff
 Iceborn Gauntlet
@@ -61,3 +60,5 @@ Trinity Force
 Rabadon's Deathcap
 Mejai's Soulstealer
 Ohmwrecker
+Hextech GLP-800
+Hextech Protobelt-01

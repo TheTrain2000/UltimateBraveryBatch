@@ -129,3 +129,4 @@ Kindred
 Illaoi
 Jhin
 Aurelion Sol
+Taliyah

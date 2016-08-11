@@ -1,29 +1,8 @@
 
-Ionian Boots of Lucidity with Alacrity
-Ionian Boots of Lucidity with Furor
-Ionian Boots of Lucidity with Distortion
-Ionian Boots of Lucidity with Captain
-Boots of Mobility with Alacrity
-Boots of Mobility with Furor
-Boots of Mobility with Distortion
-Boots of Mobility with Captain
-Boots of Swiftness with Alacrity
-Boots of Swiftness with Furor
-Boots of Swiftness with Distortion
-Boots of Swiftness with Captain
-Mercury's Treads with Alacrity
-Mercury's Treads with Furor
-Mercury's Treads with Distortion
-Mercury's Treads with Captain
-Sorcerer's Shoes with Alacrity
-Sorcerer's Shoes with Furor
-Sorcerer's Shoes with Distortion
-Sorcerer's Shoes with Captain
-Ninja Tabi with Alacrity
-Ninja Tabi with Furor
-Ninja Tabi with Distortion
-Ninja Tabi with Captain
-Berserker's Greaves with Alacrity
-Berserker's Greaves with Furor
-Berserker's Greaves with Distortion
-Berserker's Greaves with Captain
+Ionian Boots of Lucidity
+Boots of Mobility
+Boots of Swiftness
+Mercury's Treads
+Sorcerer's Shoes
+Ninja Tabi
+Berserker's Greaves

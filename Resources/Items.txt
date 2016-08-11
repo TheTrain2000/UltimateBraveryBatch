@@ -52,9 +52,10 @@ Thornmail
 Trinity Force
 Void Staff
 Warmog's Armor
-Will of the Ancients
 Wit's End
 Youmuu's Ghostblade
 Zeke's Harbinger
 Zhonya's Hourglass
 Zz'Rot Portal
+Hextech GLP-800
+Hextech Protobelt-01

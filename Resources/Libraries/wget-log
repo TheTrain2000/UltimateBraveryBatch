@@ -1,0 +1,11 @@
+--03:43:48--  https://dl.dropboxusercontent.com/u/29546617/UltimateBravery/version.txt
+           => `curver.txt'
+Resolving dl.dropboxusercontent.com... done.
+Connecting to dl.dropboxusercontent.com[108.160.173.133]:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3 [text/plain]
+
+    0K                                                       100%    2.93 KB/s
+
+03:43:49 (2.93 KB/s) - `curver.txt' saved [3/3]
+

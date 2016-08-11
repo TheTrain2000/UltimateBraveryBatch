@@ -9,12 +9,18 @@ if exist Resources/_Options.bat (
 )
 :nextoptions
 call Resources/_Options.bat
+call Resources/Translations/%lang%.bat
 color %bgcolor%%fgcolor%
-title Ultimate Bravery
+title %lang_ultimate_bravery%
+if %offlinemode%==1 goto :mainmenu
+goto :update
 
 :mainmenu
+color %bgcolor%%fgcolor%
+title %lang_ultimate_bravery%
+del "Resources\_curver.bat"
 cls
-echo Ultimate Bravery Batch - v%pversion%
+echo %lang_ultimate_bravery% Batch - v%pversion%
 echo.
 echo.
 echo Thanks to all who report bugs.
@@ -23,16 +29,14 @@ echo project. :)
 echo.
 echo.
 echo.
-echo 1.) Summoner's Rift
-echo 2.) Howling Abyss
-echo 3.) Twisted Treeline
-echo 4.) Custom Champion
-echo 5.) Team Bravery
-echo 6.) Update
-echo 7.) Exit
+echo 1.) %lang_summoners_rift%
+echo 2.) %lang_howling_abyss%
+echo 3.) %lang_twisted_treeline%
+echo 4.) %lang_custom_champion%
+echo 5.) %lang_team_bravery%
+echo 6.) %lang_exit%
 CHOICE /C 123456 /M "Select an option."
-IF ERRORLEVEL 7 exit
-IF ERRORLEVEL 6 goto :update
+IF ERRORLEVEL 6 exit
 IF ERRORLEVEL 5 goto :teambraverymenu
 IF ERRORLEVEL 4 goto :customchamp
 IF ERRORLEVEL 3 goto :TT
@@ -42,8 +46,8 @@ IF ERRORLEVEL 1 goto :SR
 if exist Resources/Champs.txt (
   goto :next
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -51,8 +55,8 @@ if exist Resources/Champs.txt (
 if exist Resources/Items.txt (
   goto :next2
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources folder. >> errorlog.txt
-  echo Items.txt is missing from the resources folder.
+  echo %DATE% %TIME% Items.txt %lang_missing_gen% >> errorlog.txt
+  echo Items.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -60,8 +64,8 @@ if exist Resources/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :next3
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -69,8 +73,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :next4
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -78,8 +82,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :next5
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -87,8 +91,8 @@ if exist Resources/Max.txt (
 if exist Resources/Summoners1.txt (
   goto :next6
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources folder. >> errorlog.txt
-  echo Summoners1.txt is missing from the resources folder.
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_gen% >> errorlog.txt
+  echo Summoners1.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -96,8 +100,8 @@ if exist Resources/Summoners1.txt (
 if exist Resources/Summoners2.txt (
   goto :next7
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources folder. >> errorlog.txt
-  echo Summoners2.txt is missing from the resources folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_gen% >> errorlog.txt
+  echo Summoners2.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -105,8 +109,8 @@ if exist Resources/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :next8
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -114,23 +118,24 @@ if exist Resources/Masteries.txt (
 if exist Resources/Trinket.txt (
   goto :next9
 ) else (
-  echo %DATE% %TIME% Trinket.txt is missing from the resources folder. >> errorlog.txt
-  echo Trinket.txt is missing from the resources folder.
+  echo %DATE% %TIME% Trinket.txt %lang_missing_gen% >> errorlog.txt
+  echo Trinket.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :next9
 :top
+set enableboots=1
 break>lastbuild.txt
 cls
-echo                                 Ultimate Bravery
-echo                                 Ultimate Bravery >> lastbuild.txt
+echo                                 %lang_ultimate_bravery%
+echo                                 %lang_ultimate_bravery% >> lastbuild.txt
 echo                                 by TheTrain2000 
 echo                                 by TheTrain2000 >> lastbuild.txt
-echo                                Curr. Patch: %patch%
-echo                                Curr. Patch: %patch% >> lastbuild.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> lastbuild.txt
-echo ------------------------------Map: Summoner's Rift------------------------------
+echo                                %lang_current_patch% %patch%
+echo                                %lang_current_patch% %patch% >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%adjectives%+1
@@ -146,6 +151,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
+if %%a==%cass% set enableboots=0
 goto show
 )
 :show
@@ -177,14 +183,28 @@ goto show2
 :show2
 echo. >> lastbuild.txt
 echo.
-SET /A LSkip=%RANDOM%%%%boots%+1
+SET /A LSkip=%RANDOM% %% %boots%+1
+if %enableboots%==1 (
+
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
 goto show8
 )
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> lastbuild.txt
+echo %%a
+goto show8
+)
+)
 :show8
+
 SET /A LSkip=%RANDOM%%%%items%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
@@ -245,7 +265,7 @@ goto show12
 :show12
 echo. >> lastbuild.txt
 echo.
-echo Press any key to reroll...
+echo %lang_reroll%
 pause >NUL
 goto :top
 
@@ -259,8 +279,8 @@ goto :top
 if exist Resources/Champs.txt (
   goto :aramnext
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -268,8 +288,8 @@ if exist Resources/Champs.txt (
 if exist Resources/ARAM/Items.txt (
   goto :aramnext2
 ) else (
-  echo %DATE% %TIME% ARAMItems.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMItems.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% ARAMItems.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMItems.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -277,8 +297,8 @@ if exist Resources/ARAM/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :aramnext3
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -286,8 +306,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :aramnext4
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -295,8 +315,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :aramnext5
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -304,8 +324,8 @@ if exist Resources/Max.txt (
 if exist Resources/ARAM/Summoners1.txt (
   goto :aramnext6
 ) else (
-  echo %DATE% %TIME% ARAMSummoners1.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMSummoners1.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% ARAMSummoners1.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMSummoners1.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -313,8 +333,8 @@ if exist Resources/ARAM/Summoners1.txt (
 if exist Resources/ARAM/Summoners2.txt (
   goto :aramnext7
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMSummoners2.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMSummoners2.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -322,23 +342,24 @@ if exist Resources/ARAM/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :aramnext8
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :aramnext8
 :top2
+set enableboots=1
 break>lastbuild.txt
 cls
-echo                                 Ultimate Bravery
-echo                                 Ultimate Bravery >> lastbuild.txt
+echo                                 %lang_ultimate_bravery%
+echo                                 %lang_ultimate_bravery% >> lastbuild.txt
 echo                                 by TheTrain2000 
 echo                                 by TheTrain2000 >> lastbuild.txt
-echo                                Curr. Patch: %patch%
-echo                                Curr. Patch: %patch% >> lastbuild.txt
-echo -------------------------------Map: Howling Abyss-------------------------------- >> lastbuild.txt
-echo -------------------------------Map: Howling Abyss-------------------------------
+echo                                %lang_current_patch% %patch%
+echo                                %lang_current_patch% %patch% >> lastbuild.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------- >> lastbuild.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%adjectives%+1
@@ -354,6 +375,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
+if %%a==%cass% set enableboots=0
 goto aramshow
 )
 :aramshow
@@ -386,13 +408,23 @@ goto aramshow2
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
 goto aramshow8
 )
+)
+SET /A LSkip=%RANDOM%%%%aramitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+echo %%a >> lastbuild.txt
+echo %%a
+goto aramshow8
+)
+)
 :aramshow8
+
 SET /A LSkip=%RANDOM%%%%aramitems%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
@@ -445,7 +477,7 @@ goto aramshow11
 :aramshow11
 echo. >> lastbuild.txt
 echo.
-echo Press any key to reroll...
+echo %lang_reroll%
 pause >NUL
 goto :top2
 
@@ -465,12 +497,12 @@ echo.
 echo.
 echo.
 echo.
-set /p customchamp="Enter a champion name: "
+set /p customchamp="%lang_custom_champ_name% "
 goto :custommenu
 
 :custommenu
 cls
-echo Ultimate Bravery Batch - v%pversion%
+echo %lang_ultimate_bravery% Batch - v%pversion%
 echo.
 echo.
 echo.
@@ -479,15 +511,13 @@ echo.
 echo.
 echo.
 echo.
-echo 1.) Summoner's Rift
-echo 2.) Howling Abyss
-echo 3.) Twisted Treeline
-echo 4.) Change Champion
-echo 5.) Update
-echo 6.) Exit
+echo 1.) %lang_summoners_rift%
+echo 2.) %lang_howling_abyss%
+echo 3.) %lang_twisted_treeline%
+echo 4.) %lang_change_champion%
+echo 5.) %lang_exit%
 CHOICE /C 123456 /M "Select an option."
-IF ERRORLEVEL 6 exit
-IF ERRORLEVEL 5 goto :update
+IF ERRORLEVEL 5 exit
 IF ERRORLEVEL 4 goto :customchamp
 IF ERRORLEVEL 3 goto :TTcustom
 IF ERRORLEVEL 2 goto :ARAMcustom
@@ -496,8 +526,8 @@ IF ERRORLEVEL 1 goto :SRcustom
 if exist Resources/Champs.txt (
   goto :nextcustom
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -505,8 +535,8 @@ if exist Resources/Champs.txt (
 if exist Resources/Items.txt (
   goto :next2custom
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources folder. >> errorlog.txt
-  echo Items.txt is missing from the resources folder.
+  echo %DATE% %TIME% Items.txt %lang_missing_gen% >> errorlog.txt
+  echo Items.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -514,8 +544,8 @@ if exist Resources/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :next3custom
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -523,8 +553,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :next4custom
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -532,8 +562,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :next5custom
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -541,8 +571,8 @@ if exist Resources/Max.txt (
 if exist Resources/Summoners1.txt (
   goto :next6custom
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources folder. >> errorlog.txt
-  echo Summoners1.txt is missing from the resources folder.
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_gen% >> errorlog.txt
+  echo Summoners1.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -550,8 +580,8 @@ if exist Resources/Summoners1.txt (
 if exist Resources/Summoners2.txt (
   goto :next7custom
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources folder. >> errorlog.txt
-  echo Summoners2.txt is missing from the resources folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_gen% >> errorlog.txt
+  echo Summoners2.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -559,8 +589,8 @@ if exist Resources/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :next8custom
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -568,23 +598,24 @@ if exist Resources/Masteries.txt (
 if exist Resources/Trinket.txt (
   goto :next9custom
 ) else (
-  echo %DATE% %TIME% Trinket.txt is missing from the resources folder. >> errorlog.txt
-  echo Trinket.txt is missing from the resources folder.
+  echo %DATE% %TIME% Trinket.txt %lang_missing_gen% >> errorlog.txt
+  echo Trinket.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :next9custom
 :topcustom
+set enableboots=1
 break>lastbuild.txt
 cls
-echo                                 Ultimate Bravery
-echo                                 Ultimate Bravery >> lastbuild.txt
+echo                                 %lang_ultimate_bravery%
+echo                                 %lang_ultimate_bravery% >> lastbuild.txt
 echo                                 by TheTrain2000 
 echo                                 by TheTrain2000 >> lastbuild.txt
-echo                                Curr. Patch: %patch%
-echo                                Curr. Patch: %patch% >> lastbuild.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> lastbuild.txt
-echo ------------------------------Map: Summoner's Rift------------------------------
+echo                                %lang_current_patch% %patch%
+echo                                %lang_current_patch% %patch% >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%adjectives%+1
@@ -598,6 +629,7 @@ goto show10custom
 
 echo %customchamp% >> lastbuild.txt
 echo %customchamp%
+if %customchamp%==%cass% set enableboots=0
 goto showcustom
 )
 :showcustom
@@ -630,11 +662,20 @@ goto show2custom
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
 goto show8custom
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> lastbuild.txt
+echo %%a
+goto show8custom
+)
 )
 :show8custom
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -697,7 +738,7 @@ goto show12custom
 :show12custom
 echo. >> lastbuild.txt
 echo.
-echo Press any key to reroll...
+echo %lang_reroll%
 pause >NUL
 goto :topcustom
 
@@ -711,8 +752,8 @@ goto :topcustom
 if exist Resources/Champs.txt (
   goto :aramnextcustom
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -720,8 +761,8 @@ if exist Resources/Champs.txt (
 if exist Resources/ARAM/Items.txt (
   goto :aramnext2custom
 ) else (
-  echo %DATE% %TIME% ARAMItems.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMItems.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% ARAMItems.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMItems.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -729,8 +770,8 @@ if exist Resources/ARAM/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :aramnext3custom
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -738,8 +779,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :aramnext4custom
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -747,8 +788,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :aramnext5custom
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -756,8 +797,8 @@ if exist Resources/Max.txt (
 if exist Resources/ARAM/Summoners1.txt (
   goto :aramnext6custom
 ) else (
-  echo %DATE% %TIME% ARAMSummoners1.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMSummoners1.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% ARAMSummoners1.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMSummoners1.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -765,8 +806,8 @@ if exist Resources/ARAM/Summoners1.txt (
 if exist Resources/ARAM/Summoners2.txt (
   goto :aramnext7custom
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMSummoners2.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMSummoners2.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -774,23 +815,24 @@ if exist Resources/ARAM/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :aramnext8custom
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :aramnext8custom
 :top2custom
+set enableboots=1
 break>lastbuild.txt
 cls
-echo                                 Ultimate Bravery
-echo                                 Ultimate Bravery >> lastbuild.txt
+echo                                 %lang_ultimate_bravery%
+echo                                 %lang_ultimate_bravery% >> lastbuild.txt
 echo                                 by TheTrain2000 
 echo                                 by TheTrain2000 >> lastbuild.txt
-echo                                Curr. Patch: %patch%
-echo                                Curr. Patch: %patch% >> lastbuild.txt
-echo -------------------------------Map: Howling Abyss-------------------------------- >> lastbuild.txt
-echo -------------------------------Map: Howling Abyss-------------------------------
+echo                                %lang_current_patch% %patch%
+echo                                %lang_current_patch% %patch% >> lastbuild.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------- >> lastbuild.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%adjectives%+1
@@ -804,6 +846,7 @@ goto aramshow10custom
 
 echo %customchamp% >> lastbuild.txt
 echo %customchamp%
+if %customchamp%==%cass% set enableboots=0
 goto aramshowcustom
 )
 :aramshowcustom
@@ -836,11 +879,20 @@ goto aramshow2custom
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
 goto aramshow8custom
+)
+)
+SET /A LSkip=%RANDOM%%%%aramitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+echo %%a >> lastbuild.txt
+echo %%a
+goto aramshow8custom
+)
 )
 :aramshow8custom
 SET /A LSkip=%RANDOM%%%%aramitems%+1
@@ -895,7 +947,7 @@ goto aramshow11custom
 :aramshow11custom
 echo. >> lastbuild.txt
 echo.
-echo Press any key to reroll...
+echo %lang_reroll%
 pause >NUL
 goto :top2custom
 
@@ -905,8 +957,8 @@ goto :top2custom
 if exist Resources/Champs.txt (
   goto :ttnext
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -914,8 +966,8 @@ if exist Resources/Champs.txt (
 if exist Resources/TT/Items.txt (
   goto :ttnext2
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Items.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Items.txt %lang_missing_tt% >> errorlog.txt
+  echo Items.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -923,8 +975,8 @@ if exist Resources/TT/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :ttnext3
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -932,8 +984,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :ttnext4
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -941,8 +993,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :ttnext5
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -950,8 +1002,8 @@ if exist Resources/Max.txt (
 if exist Resources/TT/Summoners1.txt (
   goto :ttnext6
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners1.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners1.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -959,8 +1011,8 @@ if exist Resources/TT/Summoners1.txt (
 if exist Resources/TT/Summoners2.txt (
   goto :ttnext7
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners2.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners2.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -968,23 +1020,24 @@ if exist Resources/TT/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :ttnext8
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :ttnext8
 :tttop
+set enableboots=1
 break>lastbuild.txt
 cls
-echo                                 Ultimate Bravery
-echo                                 Ultimate Bravery >> lastbuild.txt
+echo                                 %lang_ultimate_bravery%
+echo                                 %lang_ultimate_bravery% >> lastbuild.txt
 echo                                 by TheTrain2000 
 echo                                 by TheTrain2000 >> lastbuild.txt
-echo                                Curr. Patch: %patch%
-echo                                Curr. Patch: %patch% >> lastbuild.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> lastbuild.txt
-echo ------------------------------Map: Twisted Treeline-----------------------------
+echo                                %lang_current_patch% %patch%
+echo                                %lang_current_patch% %patch% >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%-----------------------------
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%adjectives%+1
@@ -1000,6 +1053,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
+if %%a==%cass% set enableboots=0
 goto ttshow
 )
 :ttshow
@@ -1032,11 +1086,20 @@ goto ttshow2
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
 goto ttshow8
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> lastbuild.txt
+echo %%a
+goto ttshow8
+)
 )
 :ttshow8
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -1091,7 +1154,7 @@ goto ttshow11
 :ttshow11
 echo. >> lastbuild.txt
 echo.
-echo Press any key to reroll...
+echo %lang_reroll%
 pause >NUL
 goto :tttop
 
@@ -1104,8 +1167,8 @@ goto :tttop
 if exist Resources/Champs.txt (
   goto :ttnextcustom
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -1113,8 +1176,8 @@ if exist Resources/Champs.txt (
 if exist Resources/TT/Items.txt (
   goto :ttnext2custom
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Items.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Items.txt %lang_missing_tt% >> errorlog.txt
+  echo Items.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -1122,8 +1185,8 @@ if exist Resources/TT/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :ttnext3custom
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -1131,8 +1194,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :ttnext4custom
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -1140,8 +1203,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :ttnext5custom
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -1149,8 +1212,8 @@ if exist Resources/Max.txt (
 if exist Resources/TT/Summoners1.txt (
   goto :ttnext6custom
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners1.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners1.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -1158,8 +1221,8 @@ if exist Resources/TT/Summoners1.txt (
 if exist Resources/TT/Summoners2.txt (
   goto :ttnext7custom
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners2.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners2.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -1167,23 +1230,24 @@ if exist Resources/TT/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :ttnext8custom
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :ttnext8custom
 :tttopcustom
+set enableboots=1
 break>lastbuild.txt
 cls
-echo                                 Ultimate Bravery
-echo                                 Ultimate Bravery >> lastbuild.txt
+echo                                 %lang_ultimate_bravery%
+echo                                 %lang_ultimate_bravery% >> lastbuild.txt
 echo                                 by TheTrain2000 
 echo                                 by TheTrain2000 >> lastbuild.txt
-echo                                Curr. Patch: %patch%
-echo                                Curr. Patch: %patch% >> lastbuild.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> lastbuild.txt
-echo ------------------------------Map: Twisted Treeline-----------------------------
+echo                                %lang_current_patch% %patch%
+echo                                %lang_current_patch% %patch% >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> lastbuild.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%-----------------------------
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%adjectives%+1
@@ -1197,6 +1261,7 @@ goto ttshow10custom
 
 echo %customchamp% >> lastbuild.txt
 echo %customchamp%
+if %customchamp%==%cass% set enableboots=0
 goto ttshowcustom
 )
 :ttshowcustom
@@ -1229,11 +1294,20 @@ goto ttshow2custom
 echo. >> lastbuild.txt
 echo.
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> lastbuild.txt
 echo %%a
 goto ttshow8custom
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> lastbuild.txt
+echo %%a
+goto ttshow8custom
+)
 )
 :ttshow8custom
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -1288,7 +1362,7 @@ goto ttshow11custom
 :ttshow11custom
 echo. >> lastbuild.txt
 echo.
-echo Press any key to reroll...
+echo %lang_reroll%
 pause >NUL
 goto :tttopcustom
 
@@ -1296,6 +1370,20 @@ goto :tttopcustom
 
 :update
 cls
+if %forceupdate%==1 goto :forceupdate
+Resources\Libraries\wget -O Resources\_curver.bat "%vcheckurl%"
+for %%a in (Resources\_curver.bat) do (
+set curverlength=%%~za
+)
+if %curverlength% equ 0 goto :failedupdatecheck
+call Resources\_curver.bat
+if %pversion% equ %curver% goto :nextupdate
+:nextupdate
+if %patch% equ %curpatch% goto :mainmenu
+if %curpatch% equ unknown goto :mainmenu
+if %curver% equ unknown goto :mainmenu
+:forceupdate
+cls
 echo.
 echo.
 echo.
@@ -1306,26 +1394,44 @@ echo.
 echo.
 echo.
 echo.
-echo When downloading, make sure to
-echo select "Replace All Files" to
-echo ensure that no errors will occur.
-echo.
-echo Press any key to begin the download...
+if %forceupdate%==1 (
+echo %lang_update_force_detect%
+) else echo %lang_update_available% (v%curver%, patch %curpatch%)
+echo %lang_update_being%
 pause >NUL
-set downloadpath=%cd%\UltimateBravery.zip
-set directory=%cd%
-%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe -Command "& {Import-Module BitsTransfer;Start-BitsTransfer '%downloadurl%' '%downloadpath%';$shell = new-object -com shell.application;$zip = $shell.NameSpace('%downloadpath%');foreach($item in $zip.items()){$shell.Namespace('%directory%').copyhere($item);};remove-item '%downloadpath%';}"
+Resources\Libraries\wget -O "%cd%\UltimateBravery.zip" "%ubmainurl%"
+Resources\Libraries\7za x "%cd%\UltimateBravery.zip" -y -o"%cd%"
+del "%cd%\UltimateBravery.zip"
+del "Resources\_curver.bat"
 echo.
 echo.
 echo.
-echo Download complete. Please restart the program.
+echo %lang_update_complete%
 pause >NUL
 exit
+
+:failedupdatecheck
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo Update check failed.
+echo Press any key to return
+echo to the main menu.
+pause >NUL
+goto :mainmenu
 
 
 :teambraverymenu
 cls
-echo Ultimate Bravery Batch - v%pversion%
+echo %lang_ultimate_bravery% Batch - v%pversion%
 echo.
 echo.
 echo.
@@ -1334,12 +1440,12 @@ echo.
 echo.
 echo.
 echo.
-echo 1.) Summoner's Rift (no smite)
-echo 2.) Twisted Treeline (no smite)
-echo 3.) Howling Abyss
-echo 4.) Summoner's Rift (smite)
-echo 5.) Twisted Treeline (smite)
-CHOICE /C 12345 /M "Select a map for Team Bravery."
+echo 1.) %lang_summoners_rift% (%lang_no_smite%)
+echo 2.) %lang_twisted_treeline% (%lang_no_smite%)
+echo 3.) %lang_howling_abyss%
+echo 4.) %lang_summoners_rift% (%lang_smite%)
+echo 5.) %lang_twisted_treeline% (%lang_smite%)
+CHOICE /C 12345 /M "Select a map for %lang_team_bravery%."
 goto :teambravery
 
 
@@ -1361,7 +1467,7 @@ echo.
 echo.
 echo.
 echo.
-echo Sending all Team Braveries to teambravery.txt .
+echo %lang_sending_team_braveries% teambravery.txt .
 PING 1.1.1.1 -n 1 -w 1500 >NUL
 cls
 echo.
@@ -1374,7 +1480,7 @@ echo.
 echo.
 echo.
 echo.
-echo Sending all Team Braveries to teambravery.txt ..
+echo %lang_sending_team_braveries% teambravery.txt ..
 PING 1.1.1.1 -n 1 -w 1500 >NUL
 cls
 echo.
@@ -1387,7 +1493,7 @@ echo.
 echo.
 echo.
 echo.
-echo Sending all Team Braveries to teambravery.txt ...
+echo %lang_sending_team_braveries% teambravery.txt ...
 PING 1.1.1.1 -n 1 -w 1500 >NUL
 cls
 echo.
@@ -1400,8 +1506,8 @@ echo.
 echo.
 echo.
 echo.
-echo Team Braveries can now be found in teambravery.txt.
-echo Press any key to exit the program.
+echo %lang_team_braveries_found% teambravery.txt.
+echo %lang_press_key_exit%
 pause >nul
 exit
 
@@ -1411,7 +1517,7 @@ break>teambravery.txt
 if exist Resources/Champs.txt (
   goto :nextteamsr
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1419,7 +1525,7 @@ if exist Resources/Champs.txt (
 if exist Resources/Items.txt (
   goto :next2teamsr
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Items.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1427,7 +1533,7 @@ if exist Resources/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :next3teamsr
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1435,7 +1541,7 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :next4teamsr
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1443,7 +1549,7 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :next5teamsr
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1451,7 +1557,7 @@ if exist Resources/Max.txt (
 if exist Resources/Summoners1.txt (
   goto :next6teamsr
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1459,7 +1565,7 @@ if exist Resources/Summoners1.txt (
 if exist Resources/Summoners2.txt (
   goto :next7teamsr
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1467,7 +1573,7 @@ if exist Resources/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :next8teamsr
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1475,15 +1581,16 @@ if exist Resources/Masteries.txt (
 if exist Resources/Trinket.txt (
   goto :next9teamsr
 ) else (
-  echo %DATE% %TIME% Trinket.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Trinket.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
 :next9teamsr
-echo                                 Ultimate Bravery >> teambravery.txt
+set enableboots=1
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -1496,6 +1603,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr
 )
 :showteamsr
@@ -1523,10 +1631,18 @@ goto show2teamsr
 :show2teamsr
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr
+)
 )
 :show8teamsr
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -1572,13 +1688,14 @@ echo %%a >> teambravery.txt
 goto show12teamsr
 )
 :show12teamsr
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -1591,6 +1708,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr2
 )
 :showteamsr2
@@ -1618,10 +1736,18 @@ goto show2teamsr2
 :show2teamsr2
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr2
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr2
+)
 )
 :show8teamsr2
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -1667,13 +1793,14 @@ echo %%a >> teambravery.txt
 goto show12teamsr2
 )
 :show12teamsr2
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -1713,10 +1840,18 @@ goto show2teamsr3
 :show2teamsr3
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr3
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr3
+)
 )
 :show8teamsr3
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -1762,13 +1897,14 @@ echo %%a >> teambravery.txt
 goto show12teamsr3
 )
 :show12teamsr3
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -1781,6 +1917,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr4
 )
 :showteamsr4
@@ -1808,10 +1945,18 @@ goto show2teamsr4
 :show2teamsr4
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr4
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr4
+)
 )
 :show8teamsr4
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -1857,13 +2002,14 @@ echo %%a >> teambravery.txt
 goto show12teamsr4
 )
 :show12teamsr4
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -1876,6 +2022,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr5
 )
 :showteamsr5
@@ -1903,10 +2050,18 @@ goto show2teamsr5
 :show2teamsr5
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr5
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr5
+)
 )
 :show8teamsr5
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -1962,7 +2117,7 @@ break>teambravery.txt
 if exist Resources/Champs.txt (
   goto :nextteamsrsmite
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1970,7 +2125,7 @@ if exist Resources/Champs.txt (
 if exist Resources/Items.txt (
   goto :next2teamsrsmite
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Items.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1978,7 +2133,7 @@ if exist Resources/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :next3teamsrsmite
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1986,7 +2141,7 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :next4teamsrsmite
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -1994,7 +2149,7 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :next5teamsrsmite
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -2002,7 +2157,7 @@ if exist Resources/Max.txt (
 if exist Resources/Summoners1.txt (
   goto :next6teamsrsmite
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -2010,7 +2165,7 @@ if exist Resources/Summoners1.txt (
 if exist Resources/Summoners2.txt (
   goto :next7teamsrsmite
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -2018,7 +2173,7 @@ if exist Resources/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :next8teamsrsmite
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
@@ -2026,15 +2181,16 @@ if exist Resources/Masteries.txt (
 if exist Resources/Trinket.txt (
   goto :next9teamsrsmite
 ) else (
-  echo %DATE% %TIME% Trinket.txt is missing from the resources folder. >> errorlog.txt
+  echo %DATE% %TIME% Trinket.txt %lang_missing_gen% >> errorlog.txt
   pause >nul
   exit
 )
 :next9teamsrsmite
-echo                                 Ultimate Bravery >> teambravery.txt
+set enableboots=1
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2047,6 +2203,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsrsmite
 )
 :showteamsrsmite
@@ -2071,10 +2228,18 @@ goto show2teamsrsmite
 :show2teamsrsmite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsrsmite
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsrsmite
+)
 )
 :show8teamsrsmite
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -2120,13 +2285,14 @@ echo %%a >> teambravery.txt
 goto show12teamsrsmite
 )
 :show12teamsrsmite
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2139,6 +2305,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr2smite
 )
 :showteamsr2smite
@@ -2166,10 +2333,18 @@ goto show2teamsr2smite
 :show2teamsr2smite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr2smite
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr2smite
+)
 )
 :show8teamsr2smite
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -2215,13 +2390,14 @@ echo %%a >> teambravery.txt
 goto show12teamsr2smite
 )
 :show12teamsr2smite
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2234,6 +2410,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr3smite
 )
 :showteamsr3smite
@@ -2261,10 +2438,18 @@ goto show2teamsr3smite
 :show2teamsr3smite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr3smite
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr3smite
+)
 )
 :show8teamsr3smite
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -2310,13 +2495,14 @@ echo %%a >> teambravery.txt
 goto show12teamsr3smite
 )
 :show12teamsr3smite
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2329,6 +2515,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr4smite
 )
 :showteamsr4smite
@@ -2356,10 +2543,18 @@ goto show2teamsr4smite
 :show2teamsr4smite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr4smite
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr4smite
+)
 )
 :show8teamsr4smite
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -2405,13 +2600,14 @@ echo %%a >> teambravery.txt
 goto show12teamsr4smite
 )
 :show12teamsr4smite
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Summoner's Rift------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_summoners_rift%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2424,6 +2620,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto showteamsr5smite
 )
 :showteamsr5smite
@@ -2451,10 +2648,18 @@ goto show2teamsr5smite
 :show2teamsr5smite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto show8teamsr5smite
+)
+)
+SET /A LSkip=%RANDOM%%%%items%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Items.txt) do (
+echo %%a >> teambravery.txt
+goto show8teamsr5smite
+)
 )
 :show8teamsr5smite
 SET /A LSkip=%RANDOM%%%%items%+1
@@ -2510,8 +2715,8 @@ break>teambravery.txt
 if exist Resources/Champs.txt (
   goto :ttnextteam
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -2519,8 +2724,8 @@ if exist Resources/Champs.txt (
 if exist Resources/TT/Items.txt (
   goto :ttnext2team
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Items.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Items.txt %lang_missing_tt% >> errorlog.txt
+  echo Items.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -2528,8 +2733,8 @@ if exist Resources/TT/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :ttnext3team
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -2537,8 +2742,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :ttnext4team
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -2546,8 +2751,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :ttnext5team
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -2555,8 +2760,8 @@ if exist Resources/Max.txt (
 if exist Resources/TT/Summoners1.txt (
   goto :ttnext6team
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners1.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners1.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -2564,8 +2769,8 @@ if exist Resources/TT/Summoners1.txt (
 if exist Resources/TT/Summoners2.txt (
   goto :ttnext7team
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners2.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners2.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -2573,16 +2778,17 @@ if exist Resources/TT/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :ttnext8team
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :ttnext8team
-echo                                 Ultimate Bravery >> teambravery.txt
+set enableboots=1
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2595,6 +2801,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto ttshowteam
 )
 :ttshowteam
@@ -2622,10 +2829,18 @@ goto ttshow2team
 :ttshow2team
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto ttshow8team
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> teambravery.txt
+goto ttshow8team
+)
 )
 :ttshow8team
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -2671,13 +2886,14 @@ echo %%a >> teambravery.txt
 goto ttshow11team
 )
 :ttshow11team
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2690,6 +2906,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto ttshowteam2
 )
 :ttshowteam2
@@ -2717,10 +2934,18 @@ goto ttshow2team2
 :ttshow2team2
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto ttshow8team2
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> teambravery.txt
+goto ttshow8team2
+)
 )
 :ttshow8team2
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -2766,13 +2991,14 @@ echo %%a >> teambravery.txt
 goto ttshow11team2
 )
 :ttshow11team2
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2785,6 +3011,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto ttshowteam3
 )
 :ttshowteam3
@@ -2812,10 +3039,18 @@ goto ttshow2team3
 :ttshow2team3
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto ttshow8team3
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> teambravery.txt
+goto ttshow8team3
+)
 )
 :ttshow8team3
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -2871,8 +3106,8 @@ break>teambravery.txt
 if exist Resources/Champs.txt (
   goto :ttnextteamsmite
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -2880,8 +3115,8 @@ if exist Resources/Champs.txt (
 if exist Resources/TT/Items.txt (
   goto :ttnext2teamsmite
 ) else (
-  echo %DATE% %TIME% Items.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Items.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Items.txt %lang_missing_tt% >> errorlog.txt
+  echo Items.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -2889,8 +3124,8 @@ if exist Resources/TT/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :ttnext3teamsmite
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -2898,8 +3133,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :ttnext4teamsmite
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -2907,8 +3142,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :ttnext5teamsmite
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -2916,8 +3151,8 @@ if exist Resources/Max.txt (
 if exist Resources/TT/Summoners1.txt (
   goto :ttnext6teamsmite
 ) else (
-  echo %DATE% %TIME% Summoners1.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners1.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners1.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners1.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -2925,8 +3160,8 @@ if exist Resources/TT/Summoners1.txt (
 if exist Resources/TT/Summoners2.txt (
   goto :ttnext7teamsmite
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources/TT folder. >> errorlog.txt
-  echo Summoners2.txt is missing from the resources/TT folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_tt% >> errorlog.txt
+  echo Summoners2.txt %lang_missing_tt%
   pause >nul
   exit
 )
@@ -2934,16 +3169,17 @@ if exist Resources/TT/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :ttnext8teamsmite
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :ttnext8teamsmite
-echo                                 Ultimate Bravery >> teambravery.txt
+set enableboots=1
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -2956,6 +3192,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto ttshowteamsmite
 )
 :ttshowteamsmite
@@ -2980,10 +3217,18 @@ goto ttshow2teamsmite
 :ttshow2teamsmite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto ttshow8teamsmite
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> teambravery.txt
+goto ttshow8teamsmite
+)
 )
 :ttshow8teamsmite
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -3029,13 +3274,14 @@ echo %%a >> teambravery.txt
 goto ttshow11teamsmite
 )
 :ttshow11teamsmite
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -3048,6 +3294,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto ttshowteam2smite
 )
 :ttshowteam2smite
@@ -3075,10 +3322,18 @@ goto ttshow2team2smite
 :ttshow2team2smite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto ttshow8team2smite
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> teambravery.txt
+goto ttshow8team2smite
+)
 )
 :ttshow8team2smite
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -3124,13 +3379,14 @@ echo %%a >> teambravery.txt
 goto ttshow11team2smite
 )
 :ttshow11team2smite
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo ------------------------------Map: Twisted Treeline------------------------------ >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo ------------------------------%lang_map% %lang_twisted_treeline%------------------------------ >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -3143,6 +3399,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto ttshowteam3smite
 )
 :ttshowteam3smite
@@ -3170,10 +3427,18 @@ goto ttshow2team3smite
 :ttshow2team3smite
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto ttshow8team3smite
+)
+)
+SET /A LSkip=%RANDOM%%%%ttitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+echo %%a >> teambravery.txt
+goto ttshow8team3smite
+)
 )
 :ttshow8team3smite
 SET /A LSkip=%RANDOM%%%%ttitems%+1
@@ -3229,8 +3494,8 @@ break>teambravery.txt
 if exist Resources/Champs.txt (
   goto :aramnextteam
 ) else (
-  echo %DATE% %TIME% Champs.txt is missing from the resources folder. >> errorlog.txt
-  echo Champs.txt is missing from the resources folder. 
+  echo %DATE% %TIME% Champs.txt %lang_missing_gen% >> errorlog.txt
+  echo Champs.txt %lang_missing_gen% 
   pause >nul
   exit
 )
@@ -3238,8 +3503,8 @@ if exist Resources/Champs.txt (
 if exist Resources/ARAM/Items.txt (
   goto :aramnext2team
 ) else (
-  echo %DATE% %TIME% ARAMItems.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMItems.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% ARAMItems.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMItems.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -3247,8 +3512,8 @@ if exist Resources/ARAM/Items.txt (
 if exist Resources/Adjectives.txt (
   goto :aramnext3team
 ) else (
-  echo %DATE% %TIME% Adjectives.txt is missing from the resources folder. >> errorlog.txt
-  echo Adjectives.txt is missing from the resources folder.
+  echo %DATE% %TIME% Adjectives.txt %lang_missing_gen% >> errorlog.txt
+  echo Adjectives.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -3256,8 +3521,8 @@ if exist Resources/Adjectives.txt (
 if exist Resources/Boots.txt (
   goto :aramnext4team
 ) else (
-  echo %DATE% %TIME% Boots.txt is missing from the resources folder. >> errorlog.txt
-  echo Boots.txt is missing from the resources folder.
+  echo %DATE% %TIME% Boots.txt %lang_missing_gen% >> errorlog.txt
+  echo Boots.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -3265,8 +3530,8 @@ if exist Resources/Boots.txt (
 if exist Resources/Max.txt (
   goto :aramnext5team
 ) else (
-  echo %DATE% %TIME% Max.txt is missing from the resources folder. >> errorlog.txt
-  echo Max.txt is missing from the resources folder.
+  echo %DATE% %TIME% Max.txt %lang_missing_gen% >> errorlog.txt
+  echo Max.txt %lang_missing_gen%
   pause >nul
   exit
 )
@@ -3274,8 +3539,8 @@ if exist Resources/Max.txt (
 if exist Resources/ARAM/Summoners1.txt (
   goto :aramnext6team
 ) else (
-  echo %DATE% %TIME% ARAMSummoners1.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMSummoners1.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% ARAMSummoners1.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMSummoners1.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -3283,8 +3548,8 @@ if exist Resources/ARAM/Summoners1.txt (
 if exist Resources/ARAM/Summoners2.txt (
   goto :aramnext7team
 ) else (
-  echo %DATE% %TIME% Summoners2.txt is missing from the resources/ARAM folder. >> errorlog.txt
-  echo ARAMSummoners2.txt is missing from the resources/ARAM folder.
+  echo %DATE% %TIME% Summoners2.txt %lang_missing_aram% >> errorlog.txt
+  echo ARAMSummoners2.txt %lang_missing_aram%
   pause >nul
   exit
 )
@@ -3292,16 +3557,17 @@ if exist Resources/ARAM/Summoners2.txt (
 if exist Resources/Masteries.txt (
   goto :aramnext8team
 ) else (
-  echo %DATE% %TIME% Masteries.txt is missing from the resources folder. >> errorlog.txt
-  echo Masteries.txt is missing from the resources folder.
+  echo %DATE% %TIME% Masteries.txt %lang_missing_gen% >> errorlog.txt
+  echo Masteries.txt %lang_missing_gen%
   pause >nul
   exit
 )
 :aramnext8team
-echo                                 Ultimate Bravery >> teambravery.txt
+set enableboots=1
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo -------------------------------Map: Howling Abyss-------------------------------- >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------- >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -3314,6 +3580,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto aramshowteam
 )
 :aramshowteam
@@ -3341,10 +3608,18 @@ goto aramshow2team
 :aramshow2team
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto aramshow8team
+)
+)
+SET /A LSkip=%RANDOM%%%%aramitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+echo %%a >> teambravery.txt
+goto aramshow8team
+)
 )
 :aramshow8team
 SET /A LSkip=%RANDOM%%%%aramitems%+1
@@ -3390,13 +3665,14 @@ echo %%a >> teambravery.txt
 goto aramshow11team
 )
 :aramshow11team
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo -------------------------------Map: Howling Abyss-------------------------------- >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------- >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -3409,6 +3685,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto aramshowteam2
 )
 :aramshowteam2
@@ -3436,10 +3713,18 @@ goto aramshow2team2
 :aramshow2team2
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto aramshow8team2
+)
+)
+SET /A LSkip=%RANDOM%%%%aramitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+echo %%a >> teambravery.txt
+goto aramshow8team2
+)
 )
 :aramshow8team2
 SET /A LSkip=%RANDOM%%%%aramitems%+1
@@ -3485,13 +3770,14 @@ echo %%a >> teambravery.txt
 goto aramshow11team2
 )
 :aramshow11team2
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo -------------------------------Map: Howling Abyss-------------------------------- >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------- >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -3504,6 +3790,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto aramshowteam3
 )
 :aramshowteam3
@@ -3531,10 +3818,18 @@ goto aramshow2team3
 :aramshow2team3
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto aramshow8team3
+)
+)
+SET /A LSkip=%RANDOM%%%%aramitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+echo %%a >> teambravery.txt
+goto aramshow8team3
+)
 )
 :aramshow8team3
 SET /A LSkip=%RANDOM%%%%aramitems%+1
@@ -3580,13 +3875,14 @@ echo %%a >> teambravery.txt
 goto aramshow11team3
 )
 :aramshow11team3
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo -------------------------------Map: Howling Abyss-------------------------------- >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------- >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -3599,6 +3895,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto aramshowteam4
 )
 :aramshowteam4
@@ -3626,10 +3923,18 @@ goto aramshow2team4
 :aramshow2team4
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto aramshow8team4
+)
+)
+SET /A LSkip=%RANDOM%%%%aramitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+echo %%a >> teambravery.txt
+goto aramshow8team4
+)
 )
 :aramshow8team4
 SET /A LSkip=%RANDOM%%%%aramitems%+1
@@ -3675,13 +3980,14 @@ echo %%a >> teambravery.txt
 goto aramshow11team4
 )
 :aramshow11team4
+set enableboots=1
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
-echo                                 Ultimate Bravery >> teambravery.txt
+echo                                 %lang_ultimate_bravery% >> teambravery.txt
 echo                                 by TheTrain2000 >> teambravery.txt
-echo                                Curr. Patch: %patch% >> teambravery.txt
-echo -------------------------------Map: Howling Abyss-------------------------------- >> teambravery.txt
+echo                                %lang_current_patch% %patch% >> teambravery.txt
+echo -------------------------------%lang_map% %lang_howling_abyss%-------------------------------- >> teambravery.txt
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%adjectives%+1
 
@@ -3694,6 +4000,7 @@ SET /A LSkip=%RANDOM%%%%champs%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
 echo %%a >> teambravery.txt
+if %%a==%cass% set enableboots=0
 goto aramshowteam5
 )
 :aramshowteam5
@@ -3721,10 +4028,18 @@ goto aramshow2team5
 :aramshow2team5
 echo. >> teambravery.txt
 SET /A LSkip=%RANDOM%%%%boots%+1
-
+if %enableboots%==1 (
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
 echo %%a >> teambravery.txt
 goto aramshow8team5
+)
+)
+SET /A LSkip=%RANDOM%%%%aramitems%+1
+if %enableboots%==0 (
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+echo %%a >> teambravery.txt
+goto aramshow8team5
+)
 )
 :aramshow8team5
 SET /A LSkip=%RANDOM%%%%aramitems%+1
@@ -3773,4 +4088,5 @@ goto aramshow11team5
 echo. >> teambravery.txt
 echo. >> teambravery.txt
 echo. >> teambravery.txt
+set enableboots=1
 goto :backteam
