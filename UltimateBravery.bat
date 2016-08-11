@@ -1,4 +1,5 @@
 @echo off
+:programtop
 if exist Resources/_Options.bat (
   goto :nextoptions
 ) else (
@@ -34,9 +35,11 @@ echo 2.) %lang_howling_abyss%
 echo 3.) %lang_twisted_treeline%
 echo 4.) %lang_custom_champion%
 echo 5.) %lang_team_bravery%
-echo 6.) %lang_exit%
-CHOICE /C 123456 /M "Select an option."
-IF ERRORLEVEL 6 exit
+echo 6.) %lang_options_menu%
+echo 7.) %lang_exit%
+CHOICE /C 1234567 /M "Select an option."
+IF ERRORLEVEL 7 exit
+IF ERRORLEVEL 6 goto :changeoptions
 IF ERRORLEVEL 5 goto :teambraverymenu
 IF ERRORLEVEL 4 goto :customchamp
 IF ERRORLEVEL 3 goto :TT
@@ -4090,3 +4093,102 @@ echo. >> teambravery.txt
 echo. >> teambravery.txt
 set enableboots=1
 goto :backteam
+
+
+
+:changeoptions
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo %lang_options_menu_welcome%
+echo %lang_options_be_prompted%
+echo %lang_options_current_settings%
+echo %lang_options_options_file%
+echo.
+echo %lang_options_press_no_change%
+echo.
+echo %lang_press_to_continue%
+pause >NUL
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set /p bgcoloroptions="Background Color (def. 0): "
+if [%bgcoloroptions%] == [] goto :changeoptionsnext
+Resources\Libraries\fnr --cl --find "set bgcolor=%bgcolor%" --replace "set bgcolor=%bgcoloroptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+:changeoptionsnext
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set /p fgcoloroptions="Foreground Color (def. F): "
+if [%fgcoloroptions%] == [] goto :changeoptionsnext2
+Resources\Libraries\fnr --cl --find "set fgcolor=%fgcolor%" --replace "set fgcolor=%fgcoloroptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+:changeoptionsnext2
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set /p forceupdateoptions="Force Update (def. 0): "
+if [%forceupdateoptions%] == [] goto :changeoptionsnext3
+Resources\Libraries\fnr --cl --find "set forceupdate=%forceupdate%" --replace "set forceupdate=%forceupdateoptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+:changeoptionsnext3
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set /p offlinemodeoptions="Offline Mode (def. 0): "
+if [%offlinemodeoptions%] == [] goto :changeoptionsnext4
+Resources\Libraries\fnr --cl --find "set offlinemode=%offlinemode%" --replace "set offlinemode=%offlinemodeoptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+:changeoptionsnext4
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set /p languageoptions="Language (def. EN_US): "
+if [%languageoptions%] == [] goto :changeoptionsnext5
+Resources\Libraries\fnr --cl --find "set lang=%lang%" --replace "set lang=%languageoptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+:changeoptionsnext5
+cls
+goto :programtop
