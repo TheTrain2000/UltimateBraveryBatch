@@ -1380,11 +1380,13 @@ set curverlength=%%~za
 )
 if %curverlength% equ 0 goto :failedupdatecheck
 call Resources\_curver.bat
-if %pversion% equ %curver% goto :nextupdate
+if "%pversion%" neq "%curver%" set result=true
+if "%patch%" neq "%curpatch%" set result=true
+if "%result%" == "true" (
+   	goto :nextupdate
+)
+goto :mainmenu
 :nextupdate
-if %patch% equ %curpatch% goto :mainmenu
-if %curpatch% equ unknown goto :mainmenu
-if %curver% equ unknown goto :mainmenu
 :forceupdate
 cls
 echo.
