@@ -10,6 +10,7 @@ Features:
 - [X] Twisted Treeline Bravery
 - [X] Howling Abyss Bravery
 - [X] Custom Champion Selection
-- [ ] Team Bravery
 - [X] Settings Menu
-- [ ] Update Check
+- [X] Update Check
+
+

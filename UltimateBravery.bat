@@ -15,11 +15,10 @@ if exist Resources/_Settings.bat (
 
 call Resources/_Settings.bat
 call Resources/_ChampionVariables.bat
-call Resources/Translations/%lang%.bat
 color %bgcolor%%fgcolor%
-title %lang_ultimate_bravery%
+title Ultimate Bravery
 if %offlinemode%==1 goto :mainmenu
-:: goto :update
+goto :update
 
 :: ---------- Main Menu
 
@@ -41,16 +40,12 @@ echo 1.) Summoner's Rift
 echo 2.) Howling Abyss
 echo 3.) Twisted Treeline
 echo 4.) Custom Champion
-echo 5.) Team Bravery
-echo 6.) Settings
-echo 7.) Exit
-CHOICE /C 1234567 /M "Select an option."
-IF ERRORLEVEL 7 exit
-IF ERRORLEVEL 6 (
-goto :settingsmenu
-)
+echo 5.) Settings
+echo 6.) Exit
+CHOICE /C 123456 /M "Select an option."
+IF ERRORLEVEL 6 exit
 IF ERRORLEVEL 5 (
-goto :teambraverymenu
+goto :settingsmenu
 )
 IF ERRORLEVEL 4 (
 set customchampionenabled=1
@@ -103,9 +98,9 @@ echo.
 echo.
 echo.
 if %forceupdate%==1 (
-echo %lang_update_force_detect%
-) else echo %lang_update_available% (v%curver%, patch %curpatch%)
-echo %lang_update_being%
+echo Force update detected.
+) else echo There is an update available. (v%curver%, patch %curpatch%)
+echo Press any key to begin the download...
 pause >NUL
 Resources\Libraries\wget -O "%cd%\UltimateBravery.zip" "%ubmainurl%"
 Resources\Libraries\7za x "%cd%\UltimateBravery.zip" -y -o"%cd%"
@@ -114,7 +109,7 @@ del "Resources\_curver.bat"
 echo.
 echo.
 echo.
-echo %lang_update_complete%
+echo Update complete.
 pause >NUL
 exit
 
