@@ -6,10 +6,10 @@ if you are inexperienced.
 
 Features:
 
-- [ ] Summoner's Rift Bravery
-- [ ] Twisted Treeline Bravery
-- [ ] Howling Abyss Bravery
+- [X] Summoner's Rift Bravery
+- [X] Twisted Treeline Bravery
+- [X] Howling Abyss Bravery
 - [ ] Custom Champion Selection
 - [ ] Team Bravery
-- [ ] Settings Menu
+- [X] Settings Menu
 - [ ] Update Check

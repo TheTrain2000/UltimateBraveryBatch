@@ -17,13 +17,15 @@ set patch=6.16
 set pversion=1.5
 set forceupdate=0
 set offlinemode=1
+set disablesmite=0
 
 set adjectives=41
 set champs=132
-set max=3
-set boots=7
-set masteries=22
-set trinket=3
+set maxcount=3
+set bootscount=7
+set masterycount=22
+set trinketcount=3
+set summonerscount=11
 
 set srsummoners2=4
 set srsummoners1=5

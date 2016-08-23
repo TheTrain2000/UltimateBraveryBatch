@@ -4,3 +4,8 @@ Barrier
 Ignite
 Exhaust
 Flash
+Ghost
+Heal
+Clarity
+Cleanse
+Teleport

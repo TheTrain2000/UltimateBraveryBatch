@@ -33,7 +33,6 @@ echo.
 echo.
 echo.
 echo.
-goto :test
 echo.
 echo.
 echo.
@@ -47,12 +46,30 @@ echo 6.) Settings
 echo 7.) Exit
 CHOICE /C 1234567 /M "Select an option."
 IF ERRORLEVEL 7 exit
-IF ERRORLEVEL 6 goto :settingsmenu
-IF ERRORLEVEL 5 goto :teambraverymenu
-IF ERRORLEVEL 4 goto :customchamp
-IF ERRORLEVEL 3 goto :TTbravery
-IF ERRORLEVEL 2 goto :ARAMbravery
-IF ERRORLEVEL 1 goto :SRbravery
+IF ERRORLEVEL 6 (
+goto :settingsmenu
+)
+IF ERRORLEVEL 5 (
+goto :teambraverymenu
+)
+IF ERRORLEVEL 4 (
+goto :customchamp
+)
+IF ERRORLEVEL 3 (
+set map=TT
+set displaymap=Twisted Treeline
+goto :UltimateBravery
+)
+IF ERRORLEVEL 2 (
+set map=ARAM
+set displaymap=Howling Abyss
+goto :UltimateBravery
+)
+IF ERRORLEVEL 1 (
+set map=SR
+set displaymap=Summoner's Rift
+goto :UltimateBravery
+)
 
 :: ---------- Update Function
 
@@ -211,14 +228,14 @@ echo.
 echo.
 echo.
 echo.
-set /p languageoptions="Language (def. EN_US): "
+set /p disablesmiteoptions="Disable Smite (def. 0): "
 if [%languageoptions%] == [] goto :changeoptionsnext5
-Resources\Libraries\fnr --cl --find "set lang=%lang%" --replace "set lang=%languageoptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
+Resources\Libraries\fnr --cl --find "set disablesmite=%disablesmite%" --replace "set disablesmite=%disablesmiteoptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
 :changeoptionsnext5
 cls
 goto :programtop
 
-:: ---------- Generation Functions
+:: ---------- Functions
 
 :SRItemGeneration
 set /a LSkip=%RANDOM% %% %sritems%+1
@@ -236,9 +253,33 @@ echo %SRItem%
 goto:eof
 
 :TTItemGeneration
+set /a LSkip=%RANDOM% %% %ttitems%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/TT/Items.txt) do (
+set TTItem=%%a
+goto :exitttitemgeneration
+)
+:exitttitemgeneration
+
+call:ItemChecker
+
+if "!redo!"=="true" goto :TTItemGeneration
+echo %TTItem%
 goto:eof
 
 :ARAMItemGeneration
+set /a LSkip=%RANDOM% %% %aramitems%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/ARAM/Items.txt) do (
+set ARAMItem=%%a
+goto :exitaramitemgeneration
+)
+:exitaramitemgeneration
+
+call:ItemChecker
+
+if "!redo!"=="true" goto :ARAMItemGeneration
+echo %ARAMItem%
 goto:eof
 
 :ChampGeneration
@@ -254,26 +295,121 @@ goto:eof
 
 
 :AdjGeneration
+set /a LSkip=%RANDOM% %% %adjectives%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Adjectives.txt) do (
+set Adjective=%%a
+goto :exitadjgeneration
+)
+:exitadjgeneration
+
+echo %Adjective%
 goto:eof
 
 
 :BootsGeneration
+set /a LSkip=%RANDOM% %% %bootscount%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Boots.txt) do (
+set Boots=%%a
+goto :exitbootgeneration
+)
+:exitbootgeneration
+
+if "%Champion%"=="Cassiopeia" (
+	call:%map%ItemGeneration
+	goto:eof
+)
+
+echo %Boots%
 goto:eof
 
 
 :MasteryGeneration
+set /a LSkip=%RANDOM% %% %masterycount%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Masteries.txt) do (
+set Masteries=%%a
+goto :exitmasterygeneration
+)
+:exitmasterygeneration
+
+echo %Masteries%
 goto:eof
 
 
 :MaxGeneration
+set /a LSkip=%RANDOM% %% %maxcount%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Max.txt) do (
+set Max=%%a
+goto :exitmaxgeneration
+)
+:exitmaxgeneration
+
+echo %Max%
 goto:eof
 
 
 :SpellGeneration
+set /a LSkip=%RANDOM% %% %summonerscount%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Summoners.txt) do (
+set Spell1=%%a
+goto :exitspellgeneration
+)
+:exitspellgeneration
+
+set /a LSkip=%RANDOM% %% %summonerscount%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Summoners.txt) do (
+set Spell2=%%a
+goto :exitspellgeneration2
+)
+:exitspellgeneration2
+
+set redo=false
+if "!Spell1!"=="!Spell2!" set redo=true
+if "%map%"=="ARAM" (
+	if "!Spell1!"=="TELEPORT" set redo=true
+	if "!Spell2!"=="TELEPORT" set redo=true
+	if "!Spell1!"=="SMITE" set redo=true
+	if "!Spell2!"=="SMITE" set redo=true
+)
+if "%map%"=="SR" (
+	if "!Spell1!"=="CLARITY" set redo=true
+	if "!Spell2!"=="CLARITY" set redo=true
+	if "!Spell1!"=="MARK" set redo=true
+	if "!Spell2!"=="MARK" set redo=true
+)
+if "%map%"=="TT" (
+	if "!Spell1!"=="CLARITY" set redo=true
+	if "!Spell2!"=="CLARITY" set redo=true
+	if "!Spell1!"=="MARK" set redo=true
+	if "!Spell2!"=="MARK" set redo=true
+)
+if "%disablesmite%"=="1" (
+	if "!Spell1!"=="SMITE" set redo=true
+	if "!Spell2!"=="SMITE" set redo=true
+)
+
+if "!redo!"=="true" goto :SpellGeneration
+
+echo %Spell1%
+echo %Spell2%
 goto:eof
 
 
 :TrinketGeneration
+set /a LSkip=%RANDOM% %% %trinketcount%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Trinket.txt) do (
+set Trinket=%%a
+goto :exittrinketgeneration
+)
+:exittrinketgeneration
+
+echo %Trinket%
 goto:eof
 
 
@@ -308,20 +444,31 @@ if "!%Champion%[1]!"=="none" (
 
 goto:eof
 
-:test
+:UltimateBravery
 cls
+echo                                 Ultimate Bravery
+echo                                 by: TheTrain2000
+echo                                Current Patch: %patch%
+echo                                Map: %displaymap%
+echo --------------------------------------------------------------------------------
+call:AdjGeneration
 call:ChampGeneration
-
-:redoitem
-call:SRItemGeneration
-call:SRItemGeneration
-call:SRItemGeneration
-call:SRItemGeneration
-call:SRItemGeneration
-call:SRItemGeneration
-call:SRItemGeneration
-call:SRItemGeneration
-
-echo !%Champion%[1]!
-pause
-goto :test
+call:MaxGeneration
+echo.
+call:SpellGeneration
+echo.
+call:BootsGeneration
+call:%map%ItemGeneration
+call:%map%ItemGeneration
+call:%map%ItemGeneration
+call:%map%ItemGeneration
+call:%map%ItemGeneration
+echo.
+call:MasteryGeneration
+if "%map%"=="SR" (
+call:TrinketGeneration
+)
+echo.
+echo Press any key to reroll...
+pause >NUL
+goto :UltimateBravery
