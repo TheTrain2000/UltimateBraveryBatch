@@ -16,7 +16,7 @@ set lang=EN_US
 set patch=6.16
 set pversion=1.5
 set forceupdate=0
-set offlinemode=1
+set offlinemode=0
 set disablesmite=0
 
 set adjectives=41
@@ -27,17 +27,9 @@ set masterycount=22
 set trinketcount=3
 set summonerscount=11
 
-set srsummoners2=4
-set srsummoners1=5
 set sritems=62
-
 set aramitems=63
-set aramsummoners2=4
-set aramsummoners1=3
-
 set ttitems=53
-set ttsummoners2=5
-set ttsummoners1=5
 
 set vcheckurl="https://raw.githubusercontent.com/TheTrain2000/UltimateBraveryBatch/versioncheck/curver.bat"
 set ubmainurl="https://raw.githubusercontent.com/TheTrain2000/UltimateBraveryBatch/versioncheck/UltimateBravery.zip"
