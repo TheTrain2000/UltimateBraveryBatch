@@ -221,7 +221,6 @@ goto :programtop
 :: ---------- Generation Functions
 
 :SRItemGeneration
-set redo=false
 set /a LSkip=%RANDOM% %% %sritems%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/SR/Items.txt) do (
@@ -230,38 +229,11 @@ goto :exitsritemgeneration
 )
 :exitsritemgeneration
 
-if "!%Champion%[1]!"=="ranged" (
-	set result=F
-	if "%SRItem%"=="Ravenous Hydra" set result=T
-	if "%SRItem%"=="Titanic Hydra" set result=T
-	if "%result%"=="T" (
-		echo redoing
-		set redo=true
-	)
-)
+call:ItemChecker
 
-if "!%Champion%[1]!"=="melee" (
-	set result=F
-	if "%SRItem%"=="Runaan's Hurricane" set result=T
-	if "%result%"=="T" (
-		echo redoing
-		set redo=true
-	)
-)
-
-if "!%Champion%[1]!"=="none" (
-	set result=F
-	if "%SRItem%"=="Runaan's Hurricane" set result=T
-	if "%SRItem%"=="Ravenous Hydra" set result=T
-	if "%SRItem%"=="Titanic Hydra" set result=T
-	if "%result%"=="T" (
-		echo redoing
-		set redo=true
-	)
-)
-
-if "%redo%" neq "true" goto:eof
-goto :SRItemGeneration
+if "!redo!"=="true" goto :SRItemGeneration
+echo %SRItem%
+goto:eof
 
 :TTItemGeneration
 goto:eof
@@ -304,43 +276,52 @@ goto:eof
 :TrinketGeneration
 goto:eof
 
+
+:ItemChecker
+set redo=false
+if "!%Champion%[1]!"=="ranged" (
+	set result=F
+	if "%SRItem%"=="Ravenous Hydra" set result=T
+	if "%SRItem%"=="Titanic Hydra" set result=T
+	if "!result!"=="T" (
+		set redo=true
+	)
+)
+
+if "!%Champion%[1]!"=="melee" (
+	set result=F
+	if "%SRItem%"=="Runaan's Hurricane" set result=T
+	if "!result!"=="T" (
+		set redo=true
+	)
+)
+
+if "!%Champion%[1]!"=="none" (
+	set result=F
+	if "%SRItem%"=="Runaan's Hurricane" set result=T
+	if "%SRItem%"=="Ravenous Hydra" set result=T
+	if "%SRItem%"=="Titanic Hydra" set result=T
+	if "!result!"=="T" (
+		set redo=true
+	)
+)
+
+goto:eof
+
 :test
 cls
 call:ChampGeneration
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
-call:SRItemGeneration
-if "%redo%"=="true" call:SRItemGeneration
-echo %SRItem%
 
-echo %Champion%
+:redoitem
+call:SRItemGeneration
+call:SRItemGeneration
+call:SRItemGeneration
+call:SRItemGeneration
+call:SRItemGeneration
+call:SRItemGeneration
+call:SRItemGeneration
+call:SRItemGeneration
+
+echo !%Champion%[1]!
 pause
 goto :test
