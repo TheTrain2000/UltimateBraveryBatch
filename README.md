@@ -1,8 +1,6 @@
 # UltimateBraveryBatch
 
-This is the rewrite branch for the UltimateBraveryBatch program.
-This branch is highly experimental, and I do not recommend running it
-if you are inexperienced.
+Ultimate Bravery is a fanmade gamemode in League of Legends where most aspects of the game are randomized.
 
 Features:
 
@@ -11,6 +9,7 @@ Features:
 - [X] Howling Abyss Bravery
 - [X] Custom Champion Selection
 - [X] Settings Menu
+- [X] Last build saving
 - [X] Update Check
 
 
