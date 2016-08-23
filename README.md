@@ -1,10 +1,15 @@
 # UltimateBraveryBatch
 
-Ultimate Bravery is a League of Legends gamemode in which (mostly) everything is randomized.
+This is the rewrite branch for the UltimateBraveryBatch program.
+This branch is highly experimental, and I do not recommend running it
+if you are inexperienced.
 
-To run, simply double click UltimateBravery.bat
+Features:
 
-#### Common Errors (and fixes):
-Error: _Options.bat not found!
-
-Solution: Make sure you extract the .zip file before running the program.
+- [ ] Summoner's Rift Bravery
+- [ ] Twisted Treeline Bravery
+- [ ] Howling Abyss Bravery
+- [ ] Custom Champion Selection
+- [ ] Team Bravery
+- [ ] Settings Menu
+- [ ] Update Check
