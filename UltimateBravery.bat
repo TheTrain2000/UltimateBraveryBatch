@@ -1,5 +1,6 @@
 @echo off
 :programtop
+setlocal EnableDelayedExpansion
 if exist Resources/_Settings.bat (
   goto :nextsettings
 ) else (
@@ -13,6 +14,7 @@ if exist Resources/_Settings.bat (
 :: ---------- Initialization
 
 call Resources/_Settings.bat
+call Resources/_ChampionVariables.bat
 call Resources/Translations/%lang%.bat
 color %bgcolor%%fgcolor%
 title %lang_ultimate_bravery%
@@ -31,6 +33,7 @@ echo.
 echo.
 echo.
 echo.
+goto :test
 echo.
 echo.
 echo.
@@ -150,7 +153,7 @@ echo.
 echo.
 set /p bgcoloroptions="Background Color (def. 0): "
 if [%bgcoloroptions%] == [] goto :changeoptionsnext
-Resources\Libraries\fnr --cl --find "set bgcolor=%bgcolor%" --replace "set bgcolor=%bgcoloroptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+Resources\Libraries\fnr --cl --find "set bgcolor=%bgcolor%" --replace "set bgcolor=%bgcoloroptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
 :changeoptionsnext
 cls
 echo.
@@ -165,7 +168,7 @@ echo.
 echo.
 set /p fgcoloroptions="Foreground Color (def. F): "
 if [%fgcoloroptions%] == [] goto :changeoptionsnext2
-Resources\Libraries\fnr --cl --find "set fgcolor=%fgcolor%" --replace "set fgcolor=%fgcoloroptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+Resources\Libraries\fnr --cl --find "set fgcolor=%fgcolor%" --replace "set fgcolor=%fgcoloroptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
 :changeoptionsnext2
 cls
 echo.
@@ -180,7 +183,7 @@ echo.
 echo.
 set /p forceupdateoptions="Force Update (def. 0): "
 if [%forceupdateoptions%] == [] goto :changeoptionsnext3
-Resources\Libraries\fnr --cl --find "set forceupdate=%forceupdate%" --replace "set forceupdate=%forceupdateoptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+Resources\Libraries\fnr --cl --find "set forceupdate=%forceupdate%" --replace "set forceupdate=%forceupdateoptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
 :changeoptionsnext3
 cls
 echo.
@@ -195,7 +198,7 @@ echo.
 echo.
 set /p offlinemodeoptions="Offline Mode (def. 0): "
 if [%offlinemodeoptions%] == [] goto :changeoptionsnext4
-Resources\Libraries\fnr --cl --find "set offlinemode=%offlinemode%" --replace "set offlinemode=%offlinemodeoptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+Resources\Libraries\fnr --cl --find "set offlinemode=%offlinemode%" --replace "set offlinemode=%offlinemodeoptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
 :changeoptionsnext4
 cls
 echo.
@@ -210,9 +213,134 @@ echo.
 echo.
 set /p languageoptions="Language (def. EN_US): "
 if [%languageoptions%] == [] goto :changeoptionsnext5
-Resources\Libraries\fnr --cl --find "set lang=%lang%" --replace "set lang=%languageoptions%" --dir "%cd%\Resources" --fileMask "_Options.bat" --silent
+Resources\Libraries\fnr --cl --find "set lang=%lang%" --replace "set lang=%languageoptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
 :changeoptionsnext5
 cls
 goto :programtop
 
-:: ----------
+:: ---------- Generation Functions
+
+:SRItemGeneration
+set redo=false
+set /a LSkip=%RANDOM% %% %sritems%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/SR/Items.txt) do (
+set SRItem=%%a
+goto :exitsritemgeneration
+)
+:exitsritemgeneration
+
+if "!%Champion%[1]!"=="ranged" (
+	set result=F
+	if "%SRItem%"=="Ravenous Hydra" set result=T
+	if "%SRItem%"=="Titanic Hydra" set result=T
+	if "%result%"=="T" (
+		echo redoing
+		set redo=true
+	)
+)
+
+if "!%Champion%[1]!"=="melee" (
+	set result=F
+	if "%SRItem%"=="Runaan's Hurricane" set result=T
+	if "%result%"=="T" (
+		echo redoing
+		set redo=true
+	)
+)
+
+if "!%Champion%[1]!"=="none" (
+	set result=F
+	if "%SRItem%"=="Runaan's Hurricane" set result=T
+	if "%SRItem%"=="Ravenous Hydra" set result=T
+	if "%SRItem%"=="Titanic Hydra" set result=T
+	if "%result%"=="T" (
+		echo redoing
+		set redo=true
+	)
+)
+
+if "%redo%" neq "true" goto:eof
+goto :SRItemGeneration
+
+:TTItemGeneration
+goto:eof
+
+:ARAMItemGeneration
+goto:eof
+
+:ChampGeneration
+set /a LSkip=%RANDOM% %% %champs%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
+set Champion=%%a
+goto :exitchampgeneration
+)
+:exitchampgeneration
+echo %Champion%
+goto:eof
+
+
+:AdjGeneration
+goto:eof
+
+
+:BootsGeneration
+goto:eof
+
+
+:MasteryGeneration
+goto:eof
+
+
+:MaxGeneration
+goto:eof
+
+
+:SpellGeneration
+goto:eof
+
+
+:TrinketGeneration
+goto:eof
+
+:test
+cls
+call:ChampGeneration
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+call:SRItemGeneration
+if "%redo%"=="true" call:SRItemGeneration
+echo %SRItem%
+
+echo %Champion%
+pause
+goto :test

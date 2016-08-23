@@ -25,9 +25,9 @@ set boots=7
 set masteries=22
 set trinket=3
 
-set summoners2=4
-set summoners1=5
-set items=60
+set srsummoners2=4
+set srsummoners1=5
+set sritems=62
 
 set aramitems=63
 set aramsummoners2=4
