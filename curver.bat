@@ -1,2 +1,2 @@
-set curver=1.4.8
+set curver=1.5
 set curpatch=6.16
