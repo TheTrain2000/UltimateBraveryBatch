@@ -53,7 +53,8 @@ IF ERRORLEVEL 5 (
 goto :teambraverymenu
 )
 IF ERRORLEVEL 4 (
-goto :customchamp
+set customchampionenabled=1
+goto :CustomChampionMenu
 )
 IF ERRORLEVEL 3 (
 set map=TT
@@ -235,7 +236,78 @@ Resources\Libraries\fnr --cl --find "set disablesmite=%disablesmite%" --replace 
 cls
 goto :programtop
 
+:: ---------- Custom Champion Menu
+
+:CustomChampionMenu
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set /p Champion="Enter a Champion: "
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo 1.) Summoner's Rift
+echo 2.) Howling Abyss
+echo 3.) Twisted Treeline
+echo 4.) Change Champion
+echo 5.) Exit
+CHOICE /C 12345 /M "Select an option."
+IF ERRORLEVEL 5 exit
+IF ERRORLEVEL 4 (
+goto :CustomChampionMenu
+)
+IF ERRORLEVEL 3 (
+set map==TT
+set displaymap=Twisted Treeline
+goto :UltimateBravery
+)
+IF ERRORLEVEL 2 (
+set map=ARAM
+set displaymap=Howling Abyss
+goto :UltimateBravery
+)
+IF ERRORLEVEL 1 (
+set map=SR
+set displaymap=Summoner's Rift
+goto :UltimateBravery
+)
+
 :: ---------- Functions
+
+:ChampGeneration
+
+if "%customchampionenabled%"=="1" (
+	echo %Champion%
+	goto:eof
+)
+
+set /a LSkip=%RANDOM% %% %champs%+1
+
+for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
+set Champion=%%a
+goto :exitchampgeneration
+)
+:exitchampgeneration
+echo %Champion%
+goto:eof
+
+
 
 :SRItemGeneration
 set /a LSkip=%RANDOM% %% %sritems%+1
@@ -252,6 +324,8 @@ if "!redo!"=="true" goto :SRItemGeneration
 echo %SRItem%
 goto:eof
 
+
+
 :TTItemGeneration
 set /a LSkip=%RANDOM% %% %ttitems%+1
 
@@ -266,6 +340,8 @@ call:ItemChecker
 if "!redo!"=="true" goto :TTItemGeneration
 echo %TTItem%
 goto:eof
+
+
 
 :ARAMItemGeneration
 set /a LSkip=%RANDOM% %% %aramitems%+1
@@ -282,16 +358,6 @@ if "!redo!"=="true" goto :ARAMItemGeneration
 echo %ARAMItem%
 goto:eof
 
-:ChampGeneration
-set /a LSkip=%RANDOM% %% %champs%+1
-
-for /f "skip=%LSkip% tokens=*" %%a in (Resources/Champs.txt) do (
-set Champion=%%a
-goto :exitchampgeneration
-)
-:exitchampgeneration
-echo %Champion%
-goto:eof
 
 
 :AdjGeneration
@@ -305,6 +371,7 @@ goto :exitadjgeneration
 
 echo %Adjective%
 goto:eof
+
 
 
 :BootsGeneration
@@ -325,6 +392,7 @@ echo %Boots%
 goto:eof
 
 
+
 :MasteryGeneration
 set /a LSkip=%RANDOM% %% %masterycount%+1
 
@@ -338,6 +406,7 @@ echo %Masteries%
 goto:eof
 
 
+
 :MaxGeneration
 set /a LSkip=%RANDOM% %% %maxcount%+1
 
@@ -349,6 +418,7 @@ goto :exitmaxgeneration
 
 echo %Max%
 goto:eof
+
 
 
 :SpellGeneration
@@ -400,7 +470,12 @@ echo %Spell2%
 goto:eof
 
 
+
 :TrinketGeneration
+
+if "%map%"=="ARAM" goto:eof
+if "%map%"=="TT" goto:eof
+
 set /a LSkip=%RANDOM% %% %trinketcount%+1
 
 for /f "skip=%LSkip% tokens=*" %%a in (Resources/Trinket.txt) do (
@@ -444,6 +519,8 @@ if "!%Champion%[1]!"=="none" (
 
 goto:eof
 
+:: ---------- Ultimate Bravery Format
+
 :UltimateBravery
 cls
 echo                                 Ultimate Bravery
@@ -465,9 +542,7 @@ call:%map%ItemGeneration
 call:%map%ItemGeneration
 echo.
 call:MasteryGeneration
-if "%map%"=="SR" (
 call:TrinketGeneration
-)
 echo.
 echo Press any key to reroll...
 pause >NUL

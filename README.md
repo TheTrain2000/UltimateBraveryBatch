@@ -9,7 +9,7 @@ Features:
 - [X] Summoner's Rift Bravery
 - [X] Twisted Treeline Bravery
 - [X] Howling Abyss Bravery
-- [ ] Custom Champion Selection
+- [X] Custom Champion Selection
 - [ ] Team Bravery
 - [X] Settings Menu
 - [ ] Update Check
