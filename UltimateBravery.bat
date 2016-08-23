@@ -289,6 +289,7 @@ goto :UltimateBravery
 
 if "%customchampionenabled%"=="1" (
 	echo %Champion%
+	echo %Champion% >> lastbuild.txt
 	goto:eof
 )
 
@@ -300,6 +301,7 @@ goto :exitchampgeneration
 )
 :exitchampgeneration
 echo %Champion%
+echo %Champion% >> lastbuild.txt
 goto:eof
 
 
@@ -317,6 +319,7 @@ call:ItemChecker
 
 if "!redo!"=="true" goto :SRItemGeneration
 echo %SRItem%
+echo %SRItem% >> lastbuild.txt
 goto:eof
 
 
@@ -334,6 +337,7 @@ call:ItemChecker
 
 if "!redo!"=="true" goto :TTItemGeneration
 echo %TTItem%
+echo %TTItem% >> lastbuild.txt
 goto:eof
 
 
@@ -351,6 +355,7 @@ call:ItemChecker
 
 if "!redo!"=="true" goto :ARAMItemGeneration
 echo %ARAMItem%
+echo %ARAMItem%
 goto:eof
 
 
@@ -365,6 +370,7 @@ goto :exitadjgeneration
 :exitadjgeneration
 
 echo %Adjective%
+echo %Adjective% >> lastbuild.txt
 goto:eof
 
 
@@ -384,6 +390,7 @@ if "%Champion%"=="Cassiopeia" (
 )
 
 echo %Boots%
+echo %Boots% >> lastbuild.txt
 goto:eof
 
 
@@ -398,6 +405,7 @@ goto :exitmasterygeneration
 :exitmasterygeneration
 
 echo %Masteries%
+echo %Masteries% >> lastbuild.txt
 goto:eof
 
 
@@ -412,6 +420,7 @@ goto :exitmaxgeneration
 :exitmaxgeneration
 
 echo %Max%
+echo %Max% >> lastbuild.txt
 goto:eof
 
 
@@ -462,6 +471,8 @@ if "!redo!"=="true" goto :SpellGeneration
 
 echo %Spell1%
 echo %Spell2%
+echo %Spell1% >> lastbuild.txt
+echo %Spell2% >> lastbuild.txt
 goto:eof
 
 
@@ -480,6 +491,7 @@ goto :exittrinketgeneration
 :exittrinketgeneration
 
 echo %Trinket%
+echo %Trinket% >> lastbuild.txt
 goto:eof
 
 
@@ -523,12 +535,19 @@ echo                                 by: TheTrain2000
 echo                                Current Patch: %patch%
 echo                                Map: %displaymap%
 echo --------------------------------------------------------------------------------
+echo                                 Ultimate Bravery > lastbuild.txt
+echo                                 by: TheTrain2000 >> lastbuild.txt
+echo                                Current Patch: %patch% >> lastbuild.txt
+echo                                Map: %displaymap% >> lastbuild.txt
+echo -------------------------------------------------------------------------------- >> lastbuild.txt
 call:AdjGeneration
 call:ChampGeneration
 call:MaxGeneration
 echo.
+echo. >> lastbuild.txt
 call:SpellGeneration
 echo.
+echo. >> lastbuild.txt
 call:BootsGeneration
 call:%map%ItemGeneration
 call:%map%ItemGeneration
@@ -536,9 +555,11 @@ call:%map%ItemGeneration
 call:%map%ItemGeneration
 call:%map%ItemGeneration
 echo.
+echo. >> lastbuild.txt
 call:MasteryGeneration
 call:TrinketGeneration
 echo.
+echo. >> lastbuild.txt
 echo Press any key to reroll...
 pause >NUL
 goto :UltimateBravery
