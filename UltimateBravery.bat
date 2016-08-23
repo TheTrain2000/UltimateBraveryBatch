@@ -1,27 +1,32 @@
 @echo off
 :programtop
-if exist Resources/_Options.bat (
-  goto :nextoptions
+if exist Resources/_Settings.bat (
+  goto :nextsettings
 ) else (
-  echo %DATE% %TIME% _Options.bat is missing from the resources folder. >> errorlog.txt
-  echo _Options.bat is missing from the resources folder.
+  echo %DATE% %TIME% _Settings.bat is missing from the resources folder. >> errorlog.txt
+  echo _Settings.bat is missing from the resources folder.
   pause >nul
   exit
 )
-:nextoptions
-call Resources/_Options.bat
+:nextsettings
+
+:: ---------- Initialization
+
+call Resources/_Settings.bat
 call Resources/Translations/%lang%.bat
 color %bgcolor%%fgcolor%
 title %lang_ultimate_bravery%
 if %offlinemode%==1 goto :mainmenu
 :: goto :update
 
+:: ---------- Main Menu
+
 :mainmenu
 color %bgcolor%%fgcolor%
 title Ultimate Bravery
 del "Resources\_curver.bat"
 cls
-echo Ultimate Bravery Batch - v%pversion%
+echo Ultimate Bravery Batch - v%pversion%, patch %patch%
 echo.
 echo.
 echo.
@@ -45,6 +50,8 @@ IF ERRORLEVEL 4 goto :customchamp
 IF ERRORLEVEL 3 goto :TTbravery
 IF ERRORLEVEL 2 goto :ARAMbravery
 IF ERRORLEVEL 1 goto :SRbravery
+
+:: ---------- Update Function
 
 :update
 cls
@@ -90,6 +97,8 @@ echo %lang_update_complete%
 pause >NUL
 exit
 
+:: ---------- Update Check Failed
+
 :failedupdatecheck
 cls
 echo.
@@ -108,9 +117,9 @@ echo to the main menu.
 pause >NUL
 goto :mainmenu
 
+:: ---------- Change Settings
 
-
-:changeoptions
+:settingsmenu
 cls
 echo.
 echo.
@@ -120,14 +129,13 @@ echo.
 echo.
 echo.
 echo.
-echo %lang_options_menu_welcome%
-echo %lang_options_be_prompted%
-echo %lang_options_current_settings%
-echo %lang_options_options_file%
+echo Welcome to the settings menu!
+echo You will be prompted to change
+echo you current settings.
 echo.
-echo %lang_options_press_no_change%
+echo Press enter for no change.
 echo.
-echo %lang_press_to_continue%
+echo Press any key to continue...
 pause >NUL
 cls
 echo.
@@ -206,3 +214,5 @@ Resources\Libraries\fnr --cl --find "set lang=%lang%" --replace "set lang=%langu
 :changeoptionsnext5
 cls
 goto :programtop
+
+:: ----------
