@@ -13,7 +13,7 @@ set bgcolor=0
 set fgcolor=F
 
 set lang=EN_US
-set patch=6.16
+set patch=6.17
 set pversion=1.5
 set forceupdate=0
 set offlinemode=0
