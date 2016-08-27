@@ -14,7 +14,7 @@ set fgcolor=F
 
 set lang=EN_US
 set patch=6.17
-set pversion=1.5
+set pversion=1.5.1
 set forceupdate=0
 set offlinemode=0
 set disablesmite=0

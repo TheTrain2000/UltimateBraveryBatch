@@ -499,8 +499,8 @@ goto:eof
 set redo=false
 if "!%Champion%[1]!"=="ranged" (
 	set result=F
-	if "%SRItem%"=="Ravenous Hydra" set result=T
-	if "%SRItem%"=="Titanic Hydra" set result=T
+	if "!%map%Item!"=="Ravenous Hydra" set result=T
+	if "!%map%Item!"=="Titanic Hydra" set result=T
 	if "!result!"=="T" (
 		set redo=true
 	)
@@ -508,7 +508,7 @@ if "!%Champion%[1]!"=="ranged" (
 
 if "!%Champion%[1]!"=="melee" (
 	set result=F
-	if "%SRItem%"=="Runaan's Hurricane" set result=T
+	if "!%map%Item!"=="Runaan's Hurricane" set result=T
 	if "!result!"=="T" (
 		set redo=true
 	)
@@ -516,9 +516,9 @@ if "!%Champion%[1]!"=="melee" (
 
 if "!%Champion%[1]!"=="none" (
 	set result=F
-	if "%SRItem%"=="Runaan's Hurricane" set result=T
-	if "%SRItem%"=="Ravenous Hydra" set result=T
-	if "%SRItem%"=="Titanic Hydra" set result=T
+	if "!%map%Item!"=="Runaan's Hurricane" set result=T
+	if "!%map%Item!"=="Ravenous Hydra" set result=T
+	if "!%map%Item!"=="Titanic Hydra" set result=T
 	if "!result!"=="T" (
 		set redo=true
 	)
