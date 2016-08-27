@@ -225,7 +225,7 @@ echo.
 echo.
 echo.
 set /p disablesmiteoptions="Disable Smite (def. 0): "
-if [%languageoptions%] == [] goto :changeoptionsnext5
+if [%disablesmiteoptions%] == [] goto :changeoptionsnext5
 Resources\Libraries\fnr --cl --find "set disablesmite=%disablesmite%" --replace "set disablesmite=%disablesmiteoptions%" --dir "%cd%\Resources" --fileMask "_Settings.bat" --silent
 :changeoptionsnext5
 cls
