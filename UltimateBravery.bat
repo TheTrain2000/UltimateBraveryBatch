@@ -147,7 +147,7 @@ echo.
 echo.
 echo Welcome to the settings menu!
 echo You will be prompted to change
-echo you current settings.
+echo your current settings.
 echo.
 echo Press enter for no change.
 echo.
