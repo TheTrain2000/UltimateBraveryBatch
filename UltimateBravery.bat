@@ -355,7 +355,7 @@ call:ItemChecker
 
 if "!redo!"=="true" goto :ARAMItemGeneration
 echo %ARAMItem%
-echo %ARAMItem%
+echo %ARAMItem% >> lastbuild.txt
 goto:eof
 
 
