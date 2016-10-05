@@ -13,14 +13,14 @@ set bgcolor=0
 set fgcolor=F
 
 set lang=EN_US
-set patch=6.17
+set patch=6.20
 set pversion=1.5.2
 set forceupdate=0
 set offlinemode=0
 set disablesmite=0
 
 set adjectives=41
-set champs=132
+set champs=133
 set maxcount=3
 set bootscount=7
 set masterycount=22
