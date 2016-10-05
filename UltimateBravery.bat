@@ -524,6 +524,16 @@ if "!%Champion%[1]!"=="none" (
 	)
 )
 
+if "!%Champion%[1]!"=="both" (
+	set result=F
+	if "!%map%Item!"=="Runaan's Hurricane" set result=T
+	if "!%map%Item!"=="Ravenous Hydra" set result=T
+	if "!%map%Item!"=="Titanic Hydra" set result=T
+	if "!result!"=="T" (
+		set redo=false
+	)
+)
+
 goto:eof
 
 :: ---------- Ultimate Bravery Format
