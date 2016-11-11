@@ -78,6 +78,7 @@ set curverlength=%%~za
 )
 if %curverlength% equ 0 goto :failedupdatecheck
 call Resources\_curver.bat
+del "Resources\_curver.bat"
 if "%pversion%" neq "%curver%" set result=true
 if "%patch%" neq "%curpatch%" set result=true
 if "%result%" == "true" (
@@ -105,7 +106,6 @@ pause >NUL
 Resources\Libraries\wget -O "%cd%\UltimateBravery.zip" "%ubmainurl%"
 Resources\Libraries\7za x "%cd%\UltimateBravery.zip" -y -o"%cd%"
 del "%cd%\UltimateBravery.zip"
-del "Resources\_curver.bat"
 echo.
 echo.
 echo.

@@ -13,7 +13,7 @@ set bgcolor=0
 set fgcolor=F
 
 set lang=EN_US
-set patch=6.20
+set patch=6.22
 set pversion=1.5.2
 set forceupdate=0
 set offlinemode=0
@@ -27,9 +27,9 @@ set masterycount=22
 set trinketcount=3
 set summonerscount=11
 
-set sritems=62
-set aramitems=63
-set ttitems=53
+set sritems=65
+set aramitems=66
+set ttitems=56
 
 set vcheckurl="https://raw.githubusercontent.com/TheTrain2000/UltimateBraveryBatch/versioncheck/curver.bat"
 set ubmainurl="https://raw.githubusercontent.com/TheTrain2000/UltimateBraveryBatch/versioncheck/UltimateBravery.zip"
