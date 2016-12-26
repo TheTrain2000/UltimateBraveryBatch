@@ -27,8 +27,8 @@ set masterycount=22
 set trinketcount=3
 set summonerscount=11
 
-set sritems=65
-set aramitems=66
+set sritems=67
+set aramitems=64
 set ttitems=56
 
 set vcheckurl="https://raw.githubusercontent.com/TheTrain2000/UltimateBraveryBatch/versioncheck/curver.bat"

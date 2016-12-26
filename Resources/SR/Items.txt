@@ -1,6 +1,5 @@
 
 Abyssal Scepter
-Aegis of the Legion
 Archangel's Staff
 Ardent Censer
 Athene's Unholy Grail
@@ -10,8 +9,12 @@ Blade of the Ruined King
 Dead Man's Plate
 Death's Dance
 Essence Reaver
+Eye of the Equinox
+Eye of the Watchers
+Face of the Mountain
 Frozen Heart
 Frozen Mallet
+Frost Queen's Claim
 Guardian Angel
 Guinsoo's Rageblade
 Hextech Gunblade
@@ -42,7 +45,6 @@ Runaan's Hurricane
 Ravenous Hydra
 Titanic Hydra
 Rylai's Crystal Scepter
-Seraph's Embrace
 Spirit Visage
 Statikk Shiv
 Sterak's Gage
