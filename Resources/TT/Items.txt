@@ -1,6 +1,5 @@
 
 Abyssal Scepter
-Seraph's Embrace
 Ardent Censer
 Athene's Unholy Grail
 Banner of Command
@@ -55,3 +54,4 @@ Hextech Protobelt-01
 Edge of Night
 Knight's Vow
 Redemption
+Duskblade of Draktharr
